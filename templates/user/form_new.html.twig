@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}New user{% endtrans %}{% endblock %}
+
+{% block body %}
+    <h2>{% trans %}addNewUser{% endtrans %}</h2>
+    {{ form_start(newUserForm) }}
+        {{ form_row(newUserForm.firstName) }}
+        {{ form_row(newUserForm.lastName) }}
+        {{ form_row(newUserForm.email) }}
+        {{ form_row(newUserForm.plainPassword) }}
+        {{ form_row(newUserForm.roles) }}
+    <button class="btn" id="add_user">{% trans %}addUser{% endtrans %}</button>
+    {{ form_end(newUserForm) }}
+{% endblock %}

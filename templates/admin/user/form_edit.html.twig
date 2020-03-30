@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Edit user{% endtrans %}{% endblock %}
+
+{% block body %}
+    <h2>{% trans %}editUser{% endtrans %}</h2>
+    {{ form_start(editUserForm) }}
+    {{ form_row(editUserForm.firstName) }}
+    {{ form_row(editUserForm.lastName) }}
+    {{ form_row(editUserForm.email) }}
+    {{ form_row(editUserForm.plainPassword) }}
+    {{ form_row(editUserForm.roles) }}
+    <button class="btn" id="edit_user">{% trans %}editUser{% endtrans %}</button>
+    {{ form_end(editUserForm) }}
+{% endblock %}

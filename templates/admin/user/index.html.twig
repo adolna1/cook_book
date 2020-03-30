@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin{% endblock %}
+{% block body %}
+    <h1>Users</h1>
+
+    <h3>
+    <a href="{{ path('admin_users_new') }}" >{% trans %}addUser{% endtrans %}</a>
+</h3>
+
+    {% for user in users %}
+        <p>
+            <strong>{% trans %}name{% endtrans %}:</strong>{{ user.firstName }}
+            <strong>{% trans %}last_name{% endtrans %}:</strong>{{ user.lastName }}
+            <strong>{% trans %}email{% endtrans %}</strong>{{ user.email }}
+            <strong>
+                <a href="{{ path('admin_users_edit',{id: user.id}) }}" >{% trans %}edit{% endtrans %}</a>
+            </strong>
+        </p>
+    {% endfor %}
+{% endblock %}
