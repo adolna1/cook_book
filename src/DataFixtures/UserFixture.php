@@ -25,6 +25,7 @@ class UserFixture extends Fixture
             $user->setFirstName('name'.$i);
             $user->setLastName('lastname'.$i);
             $user->setRoles(['ROLE_ADMIN']);
+            $user->setIsActive(true);
             $manager->persist($user);
 
         }
@@ -35,6 +36,7 @@ class UserFixture extends Fixture
             $user->setFirstName('name'.$i);
             $user->setLastName('lastname'.$i);
             $user->setRoles(['ROLE_USER']);
+            $user->setIsActive(true);
             $manager->persist($user);
         }
         $manager->flush();

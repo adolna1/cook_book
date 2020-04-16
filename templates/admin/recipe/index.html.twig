@@ -1,0 +1,16 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block title %}Ingredient{% endblock %}
+
+{% block body %}
+    <h1>Przepisy</h1>
+    <div class="admin-add-button">
+        <a class="btn btn-primary" href="{{ path('admin_recipes_new') }}" >{% trans %}add_recipe{% endtrans %}</a>
+    </div>
+
+    <ul>
+    {% for recipe in recipes %}
+        <li><a href="{{ path('single_recipe', { 'id': recipe.id }) }}">{{ recipe.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% endblock %}

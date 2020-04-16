@@ -1,21 +1,31 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base_admin.html.twig' %}
 
 {% block title %}Admin{% endblock %}
 {% block body %}
-    <h1>Users</h1>
+    <h1>Użytkownicy</h1>
 
-    <h3>
-    <a href="{{ path('admin_users_new') }}" >{% trans %}addUser{% endtrans %}</a>
-</h3>
+    <div class="admin-add-button">
+        <a class="btn btn-primary" href="{{ path('admin_users_new') }}" >{% trans %}addUser{% endtrans %}</a>
+    </div>
 
-    {% for user in users %}
-        <p>
-            <strong>{% trans %}name{% endtrans %}:</strong>{{ user.firstName }}
-            <strong>{% trans %}last_name{% endtrans %}:</strong>{{ user.lastName }}
-            <strong>{% trans %}email{% endtrans %}</strong>{{ user.email }}
-            <strong>
-                <a href="{{ path('admin_users_edit',{id: user.id}) }}" >{% trans %}edit{% endtrans %}</a>
-            </strong>
-        </p>
-    {% endfor %}
+    <table class="table table-hover admin-table">
+        <thead>
+        <tr>
+            <th scope="col">Imię</th>
+            <th scope="col">Nazwisko</th>
+            <th scope="col">Email</th>
+            <th scope="col">Edytuj</th>
+        </tr>
+        </thead>
+        {% for user in users %}
+            <tbody>
+            <tr>
+                <td scope="row">{{ user.firstName }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>{{ user.email }}</td>
+                <td><a class="btn btn-outline-info" href="{{ path('admin_users_edit',{ id: user.id }) }}" >{% trans %}edit{% endtrans %}</a></td>
+            </tr>
+            </tbody>
+        {% endfor %}
+    </table>
 {% endblock %}

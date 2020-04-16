@@ -1,0 +1,38 @@
+<nav class="navbar navbar-dark d-flex justify-content-between fixed-top p-0 shadow navbar-color">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">CookBook</a>
+    <div class="d-flex justify-content-end">
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="#">{#{{ user.firstName }} {{ user.lastName }}#}nam</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="{{ path('app_logout' ) }}">Wyloguj</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('admin_users_index') }}">
+                            <span data-feather="home"></span>
+                            {% trans %}users{% endtrans %}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('admin_recipes_index') }}">
+                            <span data-feather="home"></span>
+                            {% trans %}recipes{% endtrans %}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>

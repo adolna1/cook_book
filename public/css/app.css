@@ -1,0 +1,102 @@
+body {
+    font-size: .875rem;
+    background-color: white;
+}
+/*
+ * Sidebar
+ */
+
+
+.sidebar-sticky {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #c6db9f;
+    padding-top: 50px;
+    float: left;
+}
+
+.sidebar .nav-link {
+    font-weight: 500;
+    font-size: 2em;
+    color: white;
+    text-transform: uppercase;
+}
+
+.sidebar .nav-link .feather {
+    margin-right: 4px;
+    color: orange;
+}
+
+.sidebar .nav-link.active {
+    color: #007bff;
+}
+
+.sidebar .nav-link:hover .feather,
+.sidebar .nav-link.active .feather {
+    color: inherit;
+}
+
+.sidebar-heading {
+    font-size: .75rem;
+    text-transform: uppercase;
+}
+
+/*
+ * Content
+ */
+
+[role="main"] {
+    margin-left: 160px; /* Same as the width of the sidenav */
+    padding: 60px 10px;}
+
+/*
+ * Navbar
+ */
+.navbar-color {
+    background-color: #c6db9f;
+}
+
+.navbar-brand {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    font-size: 1.5rem;
+    background-color: #c6db9f;
+    box-shadow: #c6db9f;
+}
+
+.navbar .form-control {
+    padding: .75rem 1rem;
+    border-width: 0;
+    border-radius: 0;
+}
+
+.form-control-dark {
+    color: white;
+    background-color:#c6db9f;
+    border-color: #c6db9f;
+}
+
+.form-control-dark:focus {
+    border-color: transparent;
+    box-shadow: 0 0 0 3px #c6db9f;
+}
+.nav-container {
+    background-color: #c6db9f;
+}
+
+.admin-content {
+    padding-top: 15px;
+}
+
+.admin-add-button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.ingredients {
+    list-style: none;
+}

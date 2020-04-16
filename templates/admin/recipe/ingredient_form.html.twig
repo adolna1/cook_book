@@ -1,0 +1,18 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block title %}Ingredient{% endblock %}
+
+{% block body %}
+    <h2>{% trans %}new_recipe{% endtrans %}</h2>
+    {{ form_start(form) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.description) }}
+    <h3>{% trans %}add_ingredient{% endtrans %}</h3>
+    <ul class="ingredients" data-prototype="{{ form_widget(form.recipyIngradients.vars.prototype)|e('html_attr') }}">
+        {% for recipe in form.recipyIngradients %}
+            <li>{{ form_widget(recipe) }}</li>
+        {% endfor %}
+    </ul>
+    <button class="btn btn btn-primary" id="edit_user">{% trans %}Add{% endtrans %}</button>
+    {{ form_end(form) }}
+{% endblock %}
