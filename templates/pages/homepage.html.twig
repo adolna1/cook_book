@@ -3,7 +3,16 @@
 {% block title %}Homepage{% endblock %}
 
 {% block body %}
+    <div>
+    <div class="index_container">
+        <img class="main_img" src="{{ asset('images/woman.png')}}" height="100%">
+        <div class="headers_container">
+        <h1 class="index_header">Stwórz własny przepis</h1>
+        <h1 class="index_header">Wyszukuj</h1>
+        </div>
+    </div>
     <a href="{{ path('app_login') }}">{% trans %}login{% endtrans %}</a>
     <a href="{{ path('register') }}">{% trans %}register{% endtrans %}</a>
     <h1>{% trans %}homepage{% endtrans %}</h1>
+    <div>
 {% endblock %}

@@ -106,4 +106,28 @@ class UserController extends AbstractController
         return $this->render('admin/user/form_edit.html.twig', ['editUserForm' => $form->createView()]);
     }
 
+    /**
+     * @Route("/block/{id}", name="admin_users_block")
+     */
+    public function block(User $user)
+    {
+        $user->setIsActive(0);
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('admin_users_index');
+    }
+
+    /**
+     * @Route("/activate/{id}", name="admin_users_activate")
+     */
+    public function activate(User $user)
+    {
+        $user->setIsActive(1);
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('admin_users_index');
+    }
+
 }

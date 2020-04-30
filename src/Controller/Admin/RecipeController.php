@@ -6,9 +6,11 @@ namespace App\Controller\Admin;
 use App\Entity\Recipes;
 use App\Entity\RecipyIngradients;
 use App\Form\IngradientFormType;
+use App\Form\RecipeEditFormType;
 use App\Form\RecipeFormType;
 use App\Repository\RecipesRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -50,6 +52,7 @@ class RecipeController extends AbstractController
     {
         $recipeIngradient = new RecipyIngradients();
         $recipe = new Recipes();
+        $recipe->setCreatedAt(new \DateTime());
         $recipe->addRecipyIngradient($recipeIngradient);
         //$form = $this->createForm(IngradientFormType::class, $recipeIngradient);
         $form = $this->createForm(RecipeFormType::class, $recipe);
@@ -77,8 +80,7 @@ class RecipeController extends AbstractController
      */
     public function edit(Recipes $recipe, Request $request)
     {
-        dd($recipe);
-        $form = $this->createForm(RecipeFormType::class, $recipe);
+        $form = $this->createForm(RecipeEditFormType::class, $recipe);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -89,9 +91,18 @@ class RecipeController extends AbstractController
         return $this->render('admin/recipe/ingredient_form.html.twig', ['form' => $form->createView()]);
     }
 
-    public function delete()
+    /**
+     * @Route("/delete/{id}", name="admin_recepes_delete")
+     * @param Recipes $recipes
+     * @return RedirectResponse
+     */
+    public function delete(RecipesRepository $repository, $id)
     {
+        $recipe = $repository->findOneBy(['id' => $id]);
+        $this->manager->remove($recipe);
+        $this->manager->flush();
 
+        return $this->redirectToRoute('admin_recipes_index');
     }
 
 }

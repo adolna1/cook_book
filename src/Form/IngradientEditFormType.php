@@ -5,7 +5,6 @@ namespace App\Form;
 
 
 use App\Entity\Ingradients;
-use App\Entity\MeasurmentUnits;
 use App\Entity\RecipyIngradients;
 use App\Form\DataTransformer\IngredeintsDataTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -14,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class IngradientFormType extends AbstractType
+class IngradientEditFormType extends AbstractType
 {
     /**
      * @var IngredeintsDataTransformer
@@ -28,20 +27,14 @@ class IngradientFormType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-       $builder
-           ->add('ingradient', TextType::class, [
-               'label' => 'label_tags',
-               'required' => false,
-           ])
-           ->add('measurment')
-           ->add('measurmentUnit', EntityType::class, [
-               'class' => MeasurmentUnits::class,
-               'choice_label' => 'name',
-           ]);
-
-       $builder->get('ingradient')->addModelTransformer(
-           $this->ingredientsDataTransformer
-       );
+        $builder
+            ->add('ingradient', EntityType::class, [
+                'class' => Ingradients::class,
+                'choice_label' => 'name',
+                'label' => 'label_tags',
+                'required' => false,
+            ])
+            ->add('measurment');
     }
 
     /**

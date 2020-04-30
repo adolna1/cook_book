@@ -6,10 +6,23 @@ body {
  * Sidebar
  */
 
+.index_container {
+    display: flex;
+}
+.headers_container {
+    align-items: center;
+}
+.index_header {
+    width: 100%;
+    background: url(https://andyhooke.co.uk/wp-content/uploads/2018/02/yellow-brushstroke.png);
+    background-repeat: no-repeat;
+    background-size: 100% 95%;
+    padding: 8px 80px;
+}
 
 .sidebar-sticky {
     height: 100%;
-    width: 200px;
+    width: 250px;
     position: fixed;
     z-index: 1;
     top: 0;

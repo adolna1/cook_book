@@ -11,4 +11,21 @@
     {% endfor %}
     </ul>
     <p>{{ recipe.description }}</p>
+
+    <ul>
+    {% for comment in comments %}
+        <li>
+            {{ comment.content }}
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('admin_comment_delete', { 'id': comment.id }) }}">x</a>
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+    {% if is_granted('ROLE_USER') %}
+    {{ form_start(form) }}
+        {{ form_row(form.content) }}
+    <button type="submit">{% trans %}add_comment{% endtrans %}</button>
+    {{ form_end(form) }}
+    {% endif %}
 {% endblock %}

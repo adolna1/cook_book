@@ -31,6 +31,11 @@ class RecipyIngradients
      */
     private $measurment;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\MeasurmentUnits", inversedBy="recipyIngradients")
+     */
+    private $measurmentUnit;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +73,18 @@ class RecipyIngradients
     public function setMeasurment(?float $measurment): self
     {
         $this->measurment = $measurment;
+
+        return $this;
+    }
+
+    public function getMeasurmentUnit(): ?MeasurmentUnits
+    {
+        return $this->measurmentUnit;
+    }
+
+    public function setMeasurmentUnit(?MeasurmentUnits $measurmentUnit): self
+    {
+        $this->measurmentUnit = $measurmentUnit;
 
         return $this;
     }

@@ -1,0 +1,11 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block title %}{% trans %}categories{% endtrans %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans %}new_category{% endtrans %}</h1>
+    {{ form_start(form) }}
+        {{ form_row(form.name) }}
+        <button type="submit">{% trans %}add{% endtrans %}</button>
+    {{ form_end(form) }}
+{% endblock %}

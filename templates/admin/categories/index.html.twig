@@ -1,0 +1,29 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block title %}{% trans %}categories{% endtrans %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans %}categorias{% endtrans %}</h1>
+    <div class="admin-add-button">
+        <a class="btn btn-primary" href="{{ path('admin_categories_new') }}" >{% trans %}add_category{% endtrans %}</a>
+    </div>
+    <table class="table table-hover admin-table">
+    <thead>
+    <tr>
+        <th scope="col">Imię</th>
+        <th scope="col">Edytuj</th>
+        <th scope="col">Delete</th>
+    </tr>
+    </thead>
+        {% for category in categories %}
+        <tbody>
+        <tr>
+        <tbody>
+        <tr>
+            <td scope="row">{{ category.name }}</td>
+            <td><a class="btn btn-outline-info" href="{{ path('admin_categories_edit',{ id: category.id }) }}" >{% trans %}edit{% endtrans %}</a></td>
+            <td><a class="btn btn-outline-danger" href="{{ path('admin_categories_delete',{ id: category.id }) }}" >{% trans %}delete{% endtrans %}</a></td>
+        </tr>
+            {% endfor %}
+    </table>
+{% endblock %}

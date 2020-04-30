@@ -1,0 +1,12 @@
+.main {
+    font-size: .875rem;
+    /*
+    background-image: url("../images/brooke-lark-08bOYnH_r_E-unsplash.jpg");
+    */
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.main_container {
+    display: flex;
+    justify-content: flex-end;
+}

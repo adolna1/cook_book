@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block titile %}{% trans %}recipes{% endtrans %}{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+        {{ form_row(form.category) }}
+        {{ form_row(form.ingredients) }}
+        <button type="submit">find</button>
+    {{ form_end(form) }}
+
+    <table class="table table-hover admin-table">
+    <thead>
+    <tr>
+        <th scope="col">Title</th>
+    </tr>
+    </thead>
+    {% for recipe in recipes %}
+        <tbody>
+        <tr>
+            <td scope="row"><a href="{{ path('single_recipe', { 'id': recipe.id }) }}">{{ recipe.title }}</a></td>
+        </tr>
+        </tbody>
+    {% endfor %}
+    </table>
+
+    <div class="nav text-center">
+        {{ knp_pagination_render(recipes) }}
+    </div>
+{% endblock %}

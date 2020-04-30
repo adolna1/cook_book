@@ -29,13 +29,29 @@ class Recipes
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\RecipyIngradients", mappedBy="recipe", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\RecipyIngradients", mappedBy="recipe", orphanRemoval=true, cascade={"persist"})
      */
     private $recipyIngradients;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categories", inversedBy="recipes")
+     */
+    private $category;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="recipe", orphanRemoval=true)
+     */
+    private $comments;
 
     public function __construct()
     {
         $this->recipyIngradients = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -92,6 +108,61 @@ class Recipes
             // set the owning side to null (unless already changed)
             if ($recipyIngradient->getRecipe() === $this) {
                 $recipyIngradient->setRecipe(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCategory(): ?Categories
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Categories $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setRecipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getRecipe() === $this) {
+                $comment->setRecipe(null);
             }
         }
 

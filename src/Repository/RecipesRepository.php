@@ -22,19 +22,30 @@ class RecipesRepository extends ServiceEntityRepository
     // /**
     //  * @return Recipes[] Returns an array of Recipes objects
     //  */
-    /*
-    public function findByExampleField($value)
+    public function findOrderedByDate($value)
     {
         return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
+            ->andWhere('r.category = :val')
             ->setParameter('val', $value)
-            ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
+            ->orderBy('r.createdAt', 'DESC')
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
-    */
+
+    // /**
+    //  * @return Recipes[] Returns an array of Recipes objects
+    //  */
+    public function findAllOrderedByDate()
+    {
+        return $this->createQueryBuilder('r')
+            ->orderBy('r.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+
 
     /*
     public function findOneBySomeField($value): ?Recipes

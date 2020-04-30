@@ -8,9 +8,22 @@
         <a class="btn btn-primary" href="{{ path('admin_recipes_new') }}" >{% trans %}add_recipe{% endtrans %}</a>
     </div>
 
-    <ul>
+    <table class="table table-hover admin-table">
+    <thead>
+    <tr>
+        <th scope="col">Nazwa</th>
+        <th scope="col">Edytuj</th>
+        <th scope="col">Usuń</th>
+    </tr>
+    </thead>
     {% for recipe in recipes %}
-        <li><a href="{{ path('single_recipe', { 'id': recipe.id }) }}">{{ recipe.title }}</a></li>
+        <tbody>
+        <tr>
+            <td scope="row"><a href="{{ path('single_recipe', { 'id': recipe.id }) }}">{{ recipe.title }}</a></td>
+            <td><a class="btn btn-outline-info" href="{{ path('admin_recipes_edit',{ id: recipe.id }) }}" >{% trans %}edit{% endtrans %}</a></td>
+            <td><a class="btn btn-outline-danger" href="{{ path('admin_recepes_delete',{ id: recipe.id }) }}" >{% trans %}delete{% endtrans %}</a></td>
+        </tr>
+        </tbody>
     {% endfor %}
-    </ul>
+    </table>
 {% endblock %}
