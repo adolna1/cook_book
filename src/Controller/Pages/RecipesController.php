@@ -22,7 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class RecipesController
  * @package App\Controller\Pages
  *
- * @Route("recipes")
+ * @Route("/recipes")
  */
 class RecipesController extends AbstractController
 {
@@ -38,12 +38,17 @@ class RecipesController extends AbstractController
      * @var CommentRepository
      */
     private CommentRepository $commentRepository;
+    /**
+     * @var RecipesRepository
+     */
+    private RecipesRepository $recipesRepository;
 
-    public function __construct(PaginatorInterface $paginator, EntityManagerInterface $manager, CommentRepository $repository)
+    public function __construct(PaginatorInterface $paginator, EntityManagerInterface $manager, CommentRepository $repository, RecipesRepository $recipesRepository)
     {
         $this->paginator = $paginator;
         $this->manager = $manager;
         $this->commentRepository = $repository;
+        $this->recipesRepository = $recipesRepository;
     }
 
     /**
@@ -82,34 +87,14 @@ class RecipesController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()) {
             $category = $form->get('category')->getData();
-            if($category){
-                $recipes = $repository->findOrderedByDate($category);
-                $recipes = $this->paginator->paginate($recipes, $request->query->getInt('page', 1),4);
-            } else {
-                $recipes = $repository->findAllOrderedByDate();
-                $recipes = $this->paginator->paginate($recipes, $request->query->getInt('page', 1),4);
-            }
 
             $ingredients = $form->get('ingredients')->getData();
 
-            $recipes = [];
-
-            foreach ($ingredients as $ingredient) {
-                $recipeIngredients = $recipyIngradientsRepository->findBy(['ingradient' => $ingredient]);
-                foreach ($recipeIngredients as $recipeIngredient) {
-                    $recipes[] = $recipeIngredient->getRecipe()->getTitle();
-                }
-            }
-            $recipes = array_unique( array_diff_assoc( $recipes, array_unique( $recipes ) ) );
-
-            $recipes2 = [];
-            foreach ($recipes as $recipe) {
-                $recipes2[] = $repository->findOneBy(['title' => $recipe]);
-            }
-            dd($recipes2);
+            $recipes = $this->recipesRepository->findByCategoryAndIngredients($category, $ingredients);
+            $recipes = $this->paginator->paginate($recipes, $request->query->getInt('page', 1),4);
         }
 
-        return $this->render('pages/recipes/index.html.twig', ['form' => $form->createView(), 'recipes' => $recipes]);
+            return $this->render('pages/recipes/index.html.twig', ['form' => $form->createView(), 'recipes' => $recipes]);
     }
 
 }

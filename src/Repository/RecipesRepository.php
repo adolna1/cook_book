@@ -45,6 +45,42 @@ class RecipesRepository extends ServiceEntityRepository
             ;
     }
 
+    // /**
+    //  * @return Recipes[] Returns an array of Recipes objects
+    //  */
+    public function findByCategoryAndIngredients($category, object $ingredients)
+    {
+        $result = [];
+
+        if($ingredients->isEmpty()) {
+            return $this->createQueryBuilder('r')
+                ->andWhere('r.category = :category')
+                ->setParameter('category', $category)
+                ->getQuery()
+                ->getResult()
+                ;
+        } else {
+            foreach ($ingredients as $ingredient) {
+                $recipes = $this->createQueryBuilder('r')
+                    ->leftJoin('r.recipyIngradients', 'i')
+                    ->andWhere('i.ingradient = :ingredient')
+                    ->andWhere('r.category = :category')
+                    ->setParameter('category', $category)
+                    ->setParameter('ingredient', $ingredient)
+                    ->orderBy('r.createdAt', 'DESC')
+                    ->getQuery()
+                    ->getResult()
+                ;
+                foreach ($recipes as $recipe) {
+                    if (!in_array($recipe, $result)) {
+                        array_push($result, $recipe);
+                    }
+                }
+            }
+            return $result;
+        }
+    }
+
 
 
     /*
