@@ -1,19 +1,17 @@
 {% extends 'admin/base_admin.html.twig' %}
 
-{% block title %}Ingredient{% endblock %}
-
 {% block body %}
-    <h1>Przepisy</h1>
+    <h1>{% trans %}recipes{% endtrans %}</h1>
     <div class="admin-add-button">
-        <a class="btn btn-primary" href="{{ path('admin_recipes_new') }}" >{% trans %}add_recipe{% endtrans %}</a>
+        <a class="btn btn-primary" href="{{ path('admin_recipes_new') }}" >{% trans %}add_recipes{% endtrans %}</a>
     </div>
 
     <table class="table table-hover admin-table">
     <thead>
     <tr>
-        <th scope="col">Nazwa</th>
-        <th scope="col">Edytuj</th>
-        <th scope="col">Usuń</th>
+        <th scope="col">{% trans %}name{% endtrans %}</th>
+        <th scope="col">{% trans %}edit{% endtrans %}</th>
+        <th scope="col">{% trans %}delete{% endtrans %}</th>
     </tr>
     </thead>
     {% for recipe in recipes %}

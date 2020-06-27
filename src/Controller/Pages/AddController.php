@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class AddController
  * @package App\Controller\Pages
  * 
- * @Route("/add-recipe")
+ * @Route("/dodaj-przepis")
  */
 class AddController extends AbstractController
 {

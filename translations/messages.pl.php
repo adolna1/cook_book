@@ -20,5 +20,15 @@ return [
     'add_comment' => 'Dodaj komentarz',
     'add_recipes' => 'Dodaj przepis',
     'recipes' => 'Przepisy',
-    'favourites' => 'Ulubione'
+    'favourites' => 'Ulubione',
+    'categories' => 'Kategorie',
+    'add_category' => 'Dodaj Kategorię',
+    'name' => 'Imię',
+    'edit' => 'Edytuj',
+    'delete' => 'Usuń',
+    'loguot' => 'Wyloguj',
+    'users' => 'Użytkownicy',
+    'tags' => 'Tagi',
+    'add_user' => 'Dodaj użytkownika'
+
 ];

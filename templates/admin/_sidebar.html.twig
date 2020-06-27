@@ -1,14 +1,9 @@
 <nav class="navbar navbar-dark d-flex justify-content-between fixed-top p-0 shadow navbar-color">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">CookBook</a>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ path('homepage') }}">CookBook</a>
     <div class="d-flex justify-content-end">
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-                <a class="nav-link" href="#">{#{{ user.firstName }} {{ user.lastName }}#}nam</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-                <a class="nav-link" href="{{ path('app_logout' ) }}">Wyloguj</a>
+                <a class="nav-link" href="{{ path('app_logout' ) }}">{% trans %}loguot{% endtrans %}</a>
             </li>
         </ul>
     </div>
