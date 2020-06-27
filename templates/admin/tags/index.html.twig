@@ -1,0 +1,29 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block title %}{% trans %}tags{% endtrans %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans %}tags{% endtrans %}</h1>
+    <div class="admin-add-button">
+        <a class="btn btn-primary" href="{{ path('admin_tags_new') }}" >{% trans %}add_tags{% endtrans %}</a>
+    </div>
+    <table class="table table-hover admin-table">
+        <thead>
+        <tr>
+            <th scope="col">Tatle</th>
+            <th scope="col">Edytuj</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        {% for tag in tags %}
+        <tbody>
+        <tr>
+        <tbody>
+        <tr>
+            <td scope="row">{{ tag.title }}</td>
+            <td><a class="btn btn-outline-info" href="{{ path('admin_tags_edit',{ id: tag.id }) }}" >{% trans %}edit{% endtrans %}</a></td>
+            <td><a class="btn btn-outline-danger" href="{{ path('admin_tags_delete',{ id: tag.id }) }}" >{% trans %}delete{% endtrans %}</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

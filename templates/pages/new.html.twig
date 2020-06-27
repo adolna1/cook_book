@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2 class="container addHeader">{% trans %}new_recipe{% endtrans %}</h2>
+    {{ form_start(form) }}
+    <div class="new-title">
+        <div class="container">
+            {{ form_row(form.title) }}
+        </div>
+    </div>
+    <div class="new-category">
+        <div class="container">
+            {{ form_row(form.category) }}
+        </div>
+    </div>
+    <div class="new-description">
+        <div class="container">
+            {{ form_row(form.description) }}
+        </div>
+    </div>
+    <div class="new-ingredients">
+        <div class="container form-group">
+            <h3>{% trans %}add_ingredient{% endtrans %}</h3>
+            <ul class="ingredients" data-prototype="{{ form_widget(form.recipyIngradients.vars.prototype)|e('html_attr') }}">
+                {% for recipe in form.recipyIngradients %}
+                    <li>{{ form_widget(recipe) }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="new-image">
+        <div class="container">
+            {{ form_row(form.image) }}
+        </div>
+    </div>
+    <div class="new-tags">
+        <div class="container">
+            {{ form_row(form.tags) }}
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

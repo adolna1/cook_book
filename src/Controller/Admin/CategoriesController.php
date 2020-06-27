@@ -54,6 +54,8 @@ class CategoriesController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $this->manager->persist($category);
             $this->manager->flush();
+
+            return $this->redirectToRoute('admin_categories_index');
         }
 
         return $this->render('admin/categories/new.html.twig', ['form' => $form->createView()]);
@@ -71,6 +73,8 @@ class CategoriesController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $this->manager->persist($category);
             $this->manager->flush();
+
+            return $this->redirectToRoute('admin_categories_index');
         }
 
         return $this->render('admin/categories/new.html.twig', ['form' => $form->createView()]);

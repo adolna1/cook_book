@@ -74,6 +74,7 @@ class UserController extends AbstractController
             $this->entityManager->persist($user);
             $this->entityManager->flush();
 
+            return $this->redirectToRoute('admin_users_index');
         }
         return $this->render('admin/user/form_new.html.twig', ['newUserForm' => $form->createView()]);
     }
@@ -102,6 +103,8 @@ class UserController extends AbstractController
 
             $this->entityManager->persist($user);
             $this->entityManager->flush();
+
+            return $this->redirectToRoute('admin_users_index');
         }
         return $this->render('admin/user/form_edit.html.twig', ['editUserForm' => $form->createView()]);
     }

@@ -70,7 +70,11 @@ class RecipesController extends AbstractController
             $comments = $this->commentRepository->findBy(['recipe' => $recipe]);
         }
 
-        return $this->render('pages/recipe.html.twig', ['recipe' => $recipe, 'comments' => $comments, 'form' =>$form->createView()]);
+        return $this->render('pages/recipe.html.twig', [
+            'recipe' => $recipe,
+            'comments' => $comments,
+            'form' =>$form->createView()
+        ]);
     }
 
     /**
@@ -78,10 +82,13 @@ class RecipesController extends AbstractController
      *
      * @Route("", name="recipe_index")
      */
-    public function index(Request $request, RecipesRepository $repository, RecipyIngradientsRepository $recipyIngradientsRepository)
+    public function index(Request $request,
+                          RecipesRepository $repository,
+                          RecipyIngradientsRepository $recipyIngradientsRepository)
     {
         $recipes = $repository->findAllOrderedByDate();
-        $recipes = $this->paginator->paginate($recipes, $request->query->getInt('page', 1),4);
+        $recipes = $this->paginator
+            ->paginate($recipes, $request->query->getInt('page', 1),10);
         $form = $this->createForm(FindRecipeFormType::class);
         $form->handleRequest($request);
 
@@ -90,8 +97,14 @@ class RecipesController extends AbstractController
 
             $ingredients = $form->get('ingredients')->getData();
 
-            $recipes = $this->recipesRepository->findByCategoryAndIngredients($category, $ingredients);
-            $recipes = $this->paginator->paginate($recipes, $request->query->getInt('page', 1),4);
+            $recipes = $this->recipesRepository
+                ->findByCategoryAndIngredients($category, $ingredients);
+            if(!empty($recipes)) {
+                $recipes = $this->paginator
+                    ->paginate($recipes, $request->query->getInt('page', 1), 4);
+            } else {
+                $recipes = null;
+            }
         }
 
             return $this->render('pages/recipes/index.html.twig', ['form' => $form->createView(), 'recipes' => $recipes]);

@@ -1,0 +1,8 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block title %}{% trans %}tags{% endtrans %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans %}new_tag{% endtrans %}</h1>
+    {{ form(form) }}
+{% endblock %}

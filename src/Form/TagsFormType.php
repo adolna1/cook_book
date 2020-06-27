@@ -4,26 +4,26 @@
 namespace App\Form;
 
 
-use App\Entity\Categories;
+use App\Entity\Tags;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CategoriesFormType extends AbstractType
+class TagsFormType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name');
+        $builder->add('title')
+            ->add('save', SubmitType::class, [
+                'label' => 'Zapisz'
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Categories::class,
+            'data_class' => Tags::class,
         ]);
     }
-
 }

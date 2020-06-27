@@ -1,5 +1,5 @@
 // setup an "add a tag" link
-var $addTagLink = $('<button class="btn-outline-info" href="#" class="add_ingredient_link">Add a Ingredient</button>');
+var $addTagLink = $('<button class="btn-primary btn btn-light" href="#" class="add_ingredient_link">Dodaj kolejny składnik</button>');
 var $newLinkLi = $('<li></li>').append($addTagLink);
 
 jQuery(document).ready(function() {

@@ -10,11 +10,10 @@ use App\Form\RecipeEditFormType;
 use App\Form\RecipeFormType;
 use App\Repository\RecipesRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -30,7 +29,7 @@ class RecipeController extends AbstractController
      */
     private EntityManagerInterface $manager;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager )
     {
         $this->manager = $entityManager;
     }
@@ -54,23 +53,30 @@ class RecipeController extends AbstractController
         $recipe = new Recipes();
         $recipe->setCreatedAt(new \DateTime());
         $recipe->addRecipyIngradient($recipeIngradient);
-        //$form = $this->createForm(IngradientFormType::class, $recipeIngradient);
         $form = $this->createForm(RecipeFormType::class, $recipe);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('image')->getData();
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $newFilename = $originalFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+
+                try {
+                    $imageFile->move(
+                        $this->getParameter('recipes_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+                $recipe->setImageFileName($newFilename);
+            }
             $this->manager->persist($recipe);
             $this->manager->flush();
-        }
 
-/*        if($form->isSubmitted() && $form->isValid()) {
-            $ingredients = $form->get('ingradient')->getData();
-            foreach ($ingredients as $ingredient) {
-                $recipeIngradient->setIngradient($ingredient);
-                $this->manager->persist($recipeIngradient);
-            }
-            $this->manager->flush();
-        }*/
+            return $this->redirectToRoute('admin_recipes_index');
+        }
 
         return $this->render('admin/recipe/ingredient_form.html.twig', ['form' => $form->createView()]);
     }
@@ -84,8 +90,25 @@ class RecipeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('image')->getData();
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $newFilename = $originalFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+
+                try {
+                    $imageFile->move(
+                        $this->getParameter('recipes_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+                $recipe->setImageFileName($newFilename);
+            }
             $this->manager->persist($recipe);
             $this->manager->flush();
+
+            return $this->redirectToRoute('admin_recipes_index');
         }
 
         return $this->render('admin/recipe/ingredient_form.html.twig', ['form' => $form->createView()]);

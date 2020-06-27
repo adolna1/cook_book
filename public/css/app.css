@@ -113,3 +113,112 @@ body {
 .ingredients {
     list-style: none;
 }
+
+.header_banner {
+    width: 100%
+}
+
+.homepage-choice {
+    float: left;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.homepage-choice-image {
+    width: 200px;
+}
+
+.form-check {
+    width: 30%;
+    float: left;
+}
+
+.category-form {
+    padding-top: 30px;
+    padding-bottom: 20px;
+    background-color: #ece0d1;
+}
+
+.ingredients-form {
+    background-color: #dbc1ac;
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+.recipes-container {
+    margin-top: 30px;
+}
+
+.new-title {
+    background-color: #ffdbac;
+    padding-bottom: 15px;
+}
+
+.new-category {
+    background-color: #f1c27d;
+    padding-bottom: 15px;
+}
+
+.new-description {
+    background-color: #e0ac69;
+    padding-bottom: 15px;
+}
+
+.new-ingredients {
+    background-color: #c68642;
+    padding-bottom: 15px;
+}
+
+.new-image {
+    background-color: #8e5f30;
+    padding-bottom: 15px;
+    color: white;
+}
+
+.new-tags {
+    background-color: #714c26;
+    padding-bottom: 15px;
+    color: white;
+}
+
+.recipes-list-image {
+    width: 100px;
+    height: auto;
+}
+
+.addHeader {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.recipe-image {
+    width: 30%;
+    height: auto;
+    float: left;
+}
+
+.recipe-ingredients {
+    float: left;
+    width: 70%;
+    padding-left: 30px;
+}
+
+.recipe-description {
+    width: 100%;
+    float: left;
+    margin-top: 20px;
+}
+
+.form-group {
+    padding-top: 15px;
+}
+
+.comment-form {
+    float: left;
+    width: 50%;
+}
+
+.comment-list {
+    float: left;
+    width: 100%;
+}

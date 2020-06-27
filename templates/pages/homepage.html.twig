@@ -3,16 +3,23 @@
 {% block title %}Homepage{% endblock %}
 
 {% block body %}
-    <div>
-    <div class="index_container">
-        <img class="main_img" src="{{ asset('images/woman.png')}}" height="100%">
-        <div class="headers_container">
-        <h1 class="index_header">Stwórz własny przepis</h1>
-        <h1 class="index_header">Wyszukuj</h1>
+    <img class="header_banner" src="{{asset('images/header_banner.png')}}">
+    <div class="container">
+        <div class="raw">
+            <div class="homepage-choice col-4">
+                <a href="{{ path('add_recipe') }}"><img class="homepage-choice-image" src="{{asset('images/add.png')}}"></a>
+                <h3>{% trans %}add_recipes{% endtrans %}</h3>
+            </div>
+            <div class="homepage-choice col-4">
+                <a href="{{ path('recipe_index') }}"><img class="homepage-choice-image" src="{{asset('images/search.png')}}"></a>
+                <h3>{% trans %}recipes{% endtrans %}</h3>
+            </div>
+            <div class="homepage-choice col-4">
+                <img class="homepage-choice-image" src="{{asset('images/favourite.png')}}">
+                <h3>{% trans %}favourites{% endtrans %}</h3>
+            </div>
         </div>
     </div>
-    <a href="{{ path('app_login') }}">{% trans %}login{% endtrans %}</a>
-    <a href="{{ path('register') }}">{% trans %}register{% endtrans %}</a>
-    <h1>{% trans %}homepage{% endtrans %}</h1>
-    <div>
+
+
 {% endblock %}

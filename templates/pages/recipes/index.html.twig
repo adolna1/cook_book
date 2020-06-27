@@ -3,24 +3,45 @@
 {% block titile %}{% trans %}recipes{% endtrans %}{% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
-        {{ form_row(form.category) }}
-        {{ form_row(form.ingredients) }}
-        <button type="submit">find</button>
-    {{ form_end(form) }}
 
-    <table class="table table-hover admin-table">
-    <thead>
-    <tr>
-        <th scope="col">Title</th>
-    </tr>
-    </thead>
-    {% for recipe in recipes %}
-        <tbody>
-        <tr>
-            <td scope="row"><a href="{{ path('single_recipe', { 'id': recipe.id }) }}">{{ recipe.title }}</a></td>
-        </tr>
-        </tbody>
-    {% endfor %}
-    </table>
+        {{ form_start(form) }}
+        <div class="category-form">
+            <div class="container">
+                {{ form_row(form.category) }}
+            </div>
+        </div>
+        <div class="ingredients-form">
+            <div class="container">
+                {{ form_row(form.ingredients) }}
+                <button type="submit">find</button>
+            </div>
+        </div>
+        {{ form_end(form) }}
+
+
+    <div class="container recipes-container">
+        <table class="table table-hover admin-table">
+            {% if recipes != null %}
+                {% for recipe in recipes %}
+                    <tbody>
+                    <tr>
+                        {% if recipe.imageFileName %}
+                            <td scope="row"><img class="recipes-list-image" src="{{ asset('uploads/recipes_images/'~recipe.imageFileName) }}"><a href="{{ path('single_recipe', { 'id': recipe.id }) }}">{{ recipe.title }}</a></td>
+                        {% else %}
+                            <td scope="row"><img class="recipes-list-image" src="{{ asset('images/pot.png') }}"><a href="{{ path('single_recipe', { 'id': recipe.id }) }}">{{ recipe.title }}</a></td>
+                        {% endif %}
+                    </tr>
+                    </tbody>
+                {% endfor %}
+            {% else %}
+                <div class="no-recipes">{% trans %}no_recipes{% endtrans %}</div>
+            {% endif %}
+        </table>
+
+        {% if recipes != null %}
+            <div class="nav text-center">
+                {{ knp_pagination_render(recipes) }}
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}

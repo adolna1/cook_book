@@ -19,6 +19,7 @@ class FindRecipeFormType extends AbstractType
            ->add('category', EntityType::class, [
                'class' => Categories::class,
                'choice_label' => 'name',
+               'placeholder' => 'category_placeholder',
            ]);
        $builder->add('ingredients', EntityType::class, [
            'class' => Ingradients::class,

@@ -3,16 +3,23 @@
 {% block title %}{{ recipe.title }} {% endblock %}
 
 {% block body %}
-    <h1>{{ recipe.title }}</h1>
-    <h2>{% trans %}ingredients{% endtrans %}</h2>
-    <ul>
-    {% for ingredient in recipe.recipyIngradients %}
-        <li>{{ ingredient.ingradient.name }}</li>
-    {% endfor %}
-    </ul>
-    <p>{{ recipe.description }}</p>
+    {% if recipe.imageFileName %}
+        <img class="recipe-image" src="{{ asset('uploads/recipes_images/'~recipe.imageFileName) }}">
+    {% else %}
+        <img class="recipe-image" src="{{ asset('images/pot.png') }}">
+    {% endif %}
+    <div class="recipe-ingredients">
+        <h1>{{ recipe.title }}</h1>
+        <h3>{% trans %}ingredients{% endtrans %}</h3>
+        <ul>
+        {% for ingredient in recipe.recipyIngradients %}
+            <li>{{ ingredient.ingradient.name }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+    <p class="recipe-description">{{ recipe.description }}</p>
 
-    <ul>
+    <ul class="comment-list">
     {% for comment in comments %}
         <li>
             {{ comment.content }}
@@ -23,9 +30,8 @@
     {% endfor %}
     </ul>
     {% if is_granted('ROLE_USER') %}
-    {{ form_start(form) }}
-        {{ form_row(form.content) }}
-    <button type="submit">{% trans %}add_comment{% endtrans %}</button>
-    {{ form_end(form) }}
+        <div class="comment-form">
+            {{ form(form) }}
+        </div>
     {% endif %}
 {% endblock %}
